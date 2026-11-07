@@ -1,0 +1,1039 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>User Manual · Manuale · Manual</title><style>
+:root{--bg:#0f0f0f;--fg:#f2f2f2;--muted:#a8a8a8;--lime:#D6FF00;--card:#181818;--line:#2a2a2a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 16px 64px}
+header{display:flex;align-items:center;gap:14px;margin-bottom:24px}header img{width:56px;height:56px;border-radius:13px}
+h1{font-size:24px;margin:0}h1.t{font-size:22px;margin:8px 0 4px}
+h2{color:var(--lime);font-size:19px;margin:36px 0 10px;padding-top:18px;border-top:1px solid var(--line)}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+nav button{background:#000;color:var(--fg);border:1px solid #333;border-radius:999px;padding:7px 16px;font:600 14px/1 inherit;cursor:pointer}
+nav button.on{background:var(--lime);color:#000;border-color:var(--lime)}
+article{display:none}article.on{display:block}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px;display:block;overflow-x:auto}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:600}
+td:first-child{white-space:nowrap}@media(max-width:600px){td:first-child{white-space:normal}}
+a{color:var(--lime)}.muted{color:var(--muted);font-size:14px}ul,ol{padding-left:22px}li{margin:4px 0}
+strong{color:#fff}
+</style></head><body><main>
+<header><img src="icon.png" alt=""><div><h1>AudioLab RTA Analyzer</h1><div class="muted">User Manual · Manuale d'uso · Manual de usuario</div></div></header>
+<nav><button data-l="en">English</button><button data-l="it">Italiano</button><button data-l="es">Español</button></nav>
+<article id="m-en" lang="en"><h1 class="t">AudioLab RTA Analyzer – User Manual</h1>
+<h2>1. Introduction</h2>
+<p>AudioLab RTA Analyzer turns an iPad into a measurement system for live sound, installs and studios: real-time analyzer (RTA), dual-channel transfer function, impulse response, spectrograph and SPL meter, with its own pink-noise generator.</p>
+<p>All processing runs on the iPad. Nothing is recorded or sent, and no account is needed.</p>
+<table>
+<thead>
+<tr>
+<th>What you need</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iPad with iPadOS 17.6 or later</td>
+<td>Any iPad with USB-C is ideal for audio interfaces</td>
+</tr>
+<tr>
+<td>Measurement microphone</td>
+<td>e.g. Behringer ECM8000, Dayton EMM-6, Earthworks M23. The built-in iPad mic works for quick checks only</td>
+</tr>
+<tr>
+<td>USB-C class-compliant audio interface</td>
+<td>e.g. Audient EVO 4. At least 2 inputs for an external reference; needs enough power (see Troubleshooting)</td>
+</tr>
+<tr>
+<td>Speaker or PA system</td>
+<td>Fed from the interface output for transfer-function and acoustic measurements</td>
+</tr>
+<tr>
+<td>Microphone calibration file (optional)</td>
+<td>.txt, .cal, .csv, .frd or .miccal from the mic maker or a calibration lab</td>
+</tr>
+<tr>
+<td>Acoustic calibrator or sound level meter (optional)</td>
+<td>Only to read true dB SPL instead of dBFS</td>
+</tr>
+</tbody>
+</table>
+<h2>2. First setup</h2>
+<p>Do these steps once; the app remembers your choices for each interface.</p>
+<ol>
+<li><strong>Connect the interface.</strong> Plug the USB-C interface into the iPad before opening the app. Connect the measurement mic to input 1 and turn on phantom power (48 V) if the mic needs it. Connect the interface output to your speaker or PA.</li>
+<li><strong>Open the app and tap START.</strong> iPadOS asks for microphone access: tap <strong>Allow</strong>. Without it the analyzer stays silent (you can enable it later in iPad Settings › Privacy &amp; Security › Microphone).</li>
+<li><strong>Check the input.</strong> The input button in the header (e.g. <strong>EVO4</strong>) shows the active device. The interface is selected automatically when you plug it in; tap the button to choose another device.</li>
+<li><strong>Choose the measurement channel.</strong> In the same menu pick <strong>IN 1</strong> or <strong>IN 2</strong>, the input where your mic is connected. If the selected channel is silent, a warning appears.</li>
+<li><strong>Set the input gain.</strong> Turn on PINK (see section 4) and raise the interface gain until the level meter in the side panel reads around −20 dBFS RMS, never in the red.</li>
+<li><strong>Select your microphone.</strong> Tap the mic button (e.g. <strong>ECM8000</strong>) and choose your model from the list.</li>
+<li><strong>Import the calibration file.</strong> In the mic menu tap <strong>IMPORT CAL FILE</strong> and pick the file from the Files app. When it is loaded, <strong>CAL ON</strong> appears in the header and the side panel shows the file name. Tap CAL ON / CAL OFF to switch the correction.</li>
+<li><strong>Choose the language.</strong> Tap <strong>IT · EN · ES</strong> in the header. The whole interface switches immediately.</li>
+</ol>
+<p>For transfer-function work with the internal reference, also calibrate the loopback once per interface (section 6).</p>
+<h2>3. Screen overview</h2>
+<p>The screen has three parts: the header with controls, the main measurement view, and the side panel with input status.</p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>START / STOP</strong></td>
+<td>Starts or stops the analyzer</td>
+</tr>
+<tr>
+<td><strong>PINK</strong></td>
+<td>Opens the pink-noise generator; reads PINK ON while it plays</td>
+</tr>
+<tr>
+<td><strong>IT · EN · ES</strong></td>
+<td>Interface language</td>
+</tr>
+<tr>
+<td><strong>RTA · TRANSFER · SPECTRO · IMPULSE</strong></td>
+<td>The four measurement views</td>
+</tr>
+<tr>
+<td><strong>Mic button</strong> (e.g. ECM8000)</td>
+<td>Microphone model and calibration files</td>
+</tr>
+<tr>
+<td><strong>CAL ON / CAL OFF</strong></td>
+<td>Applies or removes the mic calibration curve</td>
+</tr>
+<tr>
+<td><strong>Input button</strong> (e.g. EVO4)</td>
+<td>Input device and measurement channel</td>
+</tr>
+<tr>
+<td><strong>Active input panel</strong></td>
+<td>Device, channels, sample rate, buffer and level meter (RMS and peak in dBFS)</td>
+</tr>
+<tr>
+<td><strong>availableInputs panel</strong></td>
+<td>Technical diagnostics: what iPadOS sees (inputs, output, sample rate). Useful for support</td>
+</tr>
+<tr>
+<td><strong>Mic &amp; calibration panel</strong></td>
+<td>Selected mic, calibration file and SPL calibration status</td>
+</tr>
+</tbody>
+</table>
+<p>Orange banners above the measurement are warnings: output not on the USB interface, Low Power Mode on, silent channel, or interface reconnected. Read them before measuring.</p>
+<h2>4. Pink noise generator</h2>
+<p>Tap <strong>PINK</strong> to open the generator. Turn on <strong>Output on</strong> and set the level with the slider (−40 to 0 dBFS); start low, around −20 dBFS, and raise it gradually.</p>
+<ul>
+<li>The panel shows where the audio goes (e.g. <em>OUTPUT: EVO4</em>) and a green dot when the engine is really playing.</li>
+<li>With a USB interface connected, pink goes to the interface output, never to the iPad speaker. If the interface is unplugged while pink is on, the generator mutes automatically.</li>
+<li>The same pink signal is the <strong>internal reference</strong> of the transfer function, so the iPad volume does not affect the measurement.</li>
+</ul>
+<h2>5. RTA</h2>
+<p>The RTA shows the level of the measured signal per frequency band, from 20 Hz to 20 kHz, in dBFS (or dB SPL after SPL calibration).</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1/3 · 1/6 · 1/12 · 1/24 · 1/48</strong></td>
+<td>Band resolution in fractions of an octave. 1/3 for a quick overview, 1/12–1/24 for tuning, 1/48 for detail</td>
+</tr>
+<tr>
+<td><strong>OFF · FAST · SLOW</strong></td>
+<td>Averaging. FAST follows the signal, SLOW gives a steadier curve for pink-noise measurements</td>
+</tr>
+<tr>
+<td><strong>RESET PEAK</strong></td>
+<td>Clears the peak-hold markers (red dashes above the bars)</td>
+</tr>
+<tr>
+<td><strong>CAL SPL</strong></td>
+<td>Opens SPL calibration (section 10)</td>
+</tr>
+<tr>
+<td><strong>SNAPSHOT</strong></td>
+<td>Saves the current curve for comparison (section 9)</td>
+</tr>
+<tr>
+<td><strong>Band levels</strong></td>
+<td>Below the graph: level of the octave bands from 31.5 Hz to 16 kHz</td>
+</tr>
+</tbody>
+</table>
+<p>Low frequencies use a longer FFT, so the bass stays accurate even at 1/24 and 1/48. With pink noise and a flat system, the RTA reads flat.</p>
+<h2>6. Transfer Function</h2>
+<p>The transfer function compares what goes into the system (reference) with what the mic picks up (measurement). It shows <strong>magnitude</strong>, <strong>phase</strong> and <strong>coherence</strong>, independent of the music or noise used.</p>
+<p><strong>Reference: choose it in the REFERENCE row at the top of the card</strong></p>
+<ul>
+<li><strong>INTERNAL:</strong> the app's own pink noise is the reference. No extra cable or second input needed. Turn on PINK to measure.</li>
+<li><strong>EXT CH 2:</strong> the reference comes from the interface's second input. Use it when the signal comes from a mixing console or an external generator: split the signal and send one leg to input 2. Requires an interface with at least 2 inputs.</li>
+</ul>
+<p><strong>Delay Finder.</strong> Tap <strong>FIND DELAY</strong>: the app measures the time between reference and mic and aligns them, with sub-sample accuracy. The header shows <strong>DELAY</strong> (total time) and <strong>ACOUSTIC</strong> (time and distance in metres after removing the loopback). Repeat FIND DELAY whenever you move the mic.</p>
+<p><strong>Loopback calibration (internal reference only).</strong> With the internal reference the measurement also contains the latency and filters of the interface converters. Remove them once per interface:</p>
+<ol>
+<li>Connect a cable from the interface output to the measurement input.</li>
+<li>Select INTERNAL, turn on PINK and wait for coherence close to 1.</li>
+<li>Tap <strong>CALIBRATE LOOPBACK</strong>. Now the curve is flat and ACOUSTIC reads about 0 ms.</li>
+<li>Reconnect the mic. ACOUSTIC now shows the true mic-to-speaker distance.</li>
+</ol>
+<p>The calibration is saved per interface and survives reconnections. <strong>REMOVE LOOPBACK</strong> clears it.</p>
+<p><strong>Other controls</strong></p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SMOOTHING</strong></td>
+<td>Smooths magnitude and phase (fractional octave)</td>
+</tr>
+<tr>
+<td><strong>AVG</strong></td>
+<td>Number of vector averages. Use at least 4: with AVG 1 coherence always reads 1</td>
+</tr>
+<tr>
+<td><strong>RESET AVG</strong></td>
+<td>Restarts the averages, e.g. after moving the mic</td>
+</tr>
+<tr>
+<td><strong>CENTER / 0 dB</strong></td>
+<td>Moves the magnitude curve around 0 dB, or resets the offset</td>
+</tr>
+<tr>
+<td><strong>SNAPSHOT</strong></td>
+<td>Saves magnitude and phase for comparison</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Coherence</strong> (0–1) tells you how much to trust each frequency. Near 1 the data is reliable; low coherence means noise, reflections or too little signal, and that part of the trace is blanked.</p>
+<h2>7. Impulse response</h2>
+<p>The impulse is computed from the transfer function, so it uses the same reference and averages. 0 ms is the delay found by FIND DELAY: the main peak should fall there.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LIN</strong></td>
+<td>Linear amplitude (−1 to +1): shows polarity and the shape of the arrival</td>
+</tr>
+<tr>
+<td><strong>ETC dB</strong></td>
+<td>Energy–time curve in dB: shows reflections and decay</td>
+</tr>
+<tr>
+<td><strong>WINDOW 20 · 50 · 100 · 300 ms</strong></td>
+<td>Time span shown</td>
+</tr>
+<tr>
+<td><strong>FIND DELAY / RESET AVG</strong></td>
+<td>Same as in TRANSFER</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>POLARITY</strong> badge reads + or − from the main peak. A − on a single speaker usually means an inverted cable or driver.</p>
+<h2>8. Spectrograph</h2>
+<p>The spectrograph shows frequency (horizontal) over time (vertical, newest at the top), with colour as level. It is ideal for spotting feedback, resonances and noise that come and go.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TOP 0 … −40</strong></td>
+<td>Level shown as the brightest colour (dBFS)</td>
+</tr>
+<tr>
+<td><strong>RANGE 40 … 100</strong></td>
+<td>dB span of the colour scale</td>
+</tr>
+<tr>
+<td><strong>SPEED FAST / SLOW</strong></td>
+<td>Scroll speed</td>
+</tr>
+<tr>
+<td><strong>PAUSE / CLEAR</strong></td>
+<td>Freezes or clears the image</td>
+</tr>
+<tr>
+<td><strong>FLAT PINK</strong></td>
+<td>Tilts the display +3 dB/octave so pink noise looks flat; useful for judging tonal balance</td>
+</tr>
+</tbody>
+</table>
+<h2>9. Snapshots</h2>
+<p>Snapshots store a curve to compare it with the live measurement, for example before and after EQ, or two mic positions.</p>
+<ol>
+<li>Tap <strong>SNAPSHOT</strong> in RTA or TRANSFER. The curve is saved with a name and a colour.</li>
+<li>Tap a snapshot to show or hide it; long-press it to rename or delete.</li>
+<li>In TRANSFER, snapshots store both magnitude and phase.</li>
+</ol>
+<p>Snapshots stay on the iPad until you delete them.</p>
+<h2>10. SPL calibration</h2>
+<p>Without calibration all levels are in dBFS. Calibrate once to read true dB SPL; the offset is saved for that input. Open it with <strong>CAL SPL</strong> in the RTA view and choose a method.</p>
+<p><strong>With an acoustic calibrator (most accurate)</strong></p>
+<ol>
+<li>Insert the mic into the calibrator (tight fit) and switch it on.</li>
+<li>Set the interface gain as you will use it for measuring.</li>
+<li>Choose <strong>94</strong> or <strong>114 dB</strong> and tap <strong>MEASURE</strong>. The app detects the 1 kHz tone and saves the offset.</li>
+</ol>
+<p><strong>With a sound level meter</strong></p>
+<ol>
+<li>Place the meter next to the mic, same height, same direction. Set it to Z (or C) weighting and SLOW response.</li>
+<li>Set the interface gain as you will use it for measuring.</li>
+<li>Tap <strong>MEASURE</strong>: pink noise plays for 5 s. Read the average value on the meter, type it in and tap <strong>APPLY</strong>.</li>
+</ol>
+<p>Accuracy is that of the meter: about ±1–2 dB with a Class 2 instrument.</p>
+<p><strong>Important:</strong> after calibration do not touch the interface gain. If you change it, or the interface is reconnected, repeat CAL SPL. A banner reminds you after a reconnection.</p>
+<h2>11. Quick workflow: measuring a speaker</h2>
+<ol>
+<li>Connect interface, mic (input 1, phantom on) and speaker (interface output).</li>
+<li>Tap <strong>START</strong>, check the input button and the measurement channel.</li>
+<li>Place the mic on axis at 1 m from the speaker, at tweeter height.</li>
+<li>Turn on <strong>PINK</strong> at a low level and raise it to a comfortable level, about 20 dB above the room noise.</li>
+<li><strong>RTA</strong>, 1/12 octave, SLOW: check the overall tonal balance.</li>
+<li><strong>TRANSFER</strong>, reference INTERNAL (loopback already calibrated), AVG 8: tap <strong>FIND DELAY</strong>. ACOUSTIC should read about 2.9 ms / 1.0 m.</li>
+<li>Read magnitude and phase where coherence is high. Tap <strong>SNAPSHOT</strong>.</li>
+<li>Apply EQ or move the speaker, tap <strong>RESET AVG</strong> and compare with the snapshot.</li>
+<li><strong>IMPULSE</strong>: check polarity (+) and the reflections in ETC dB.</li>
+</ol>
+<h2>12. Troubleshooting and support</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RTA is flat at the bottom, no signal</td>
+<td>Check microphone access in iPad Settings, the measurement channel (IN 1 / IN 2), phantom power and the interface gain</td>
+</tr>
+<tr>
+<td>Pink comes out of the iPad speaker</td>
+<td>The interface is seen as input only. Disable Low Power Mode, use a powered USB-C hub or the interface's own power supply, reconnect. If needed: iPad Settings › General › Transfer or Reset iPad › Reset › Reset All Settings</td>
+</tr>
+<tr>
+<td>Banner “output not on USB”</td>
+<td>Same as above: iPadOS is not using the interface output</td>
+</tr>
+<tr>
+<td>Coherence low everywhere</td>
+<td>Signal too low or too much noise: raise the pink level, increase AVG, move the mic closer</td>
+</tr>
+<tr>
+<td>FIND DELAY reads “Not found”</td>
+<td>Pink is off, the wrong channel is selected, or the mic is too far: check and retry</td>
+</tr>
+<tr>
+<td>ACOUSTIC reads a wrong distance</td>
+<td>Calibrate the loopback for this interface (section 6)</td>
+</tr>
+<tr>
+<td>dB SPL values look wrong</td>
+<td>Gain changed after calibration, or a different input: repeat CAL SPL</td>
+</tr>
+<tr>
+<td>Calibration file rejected</td>
+<td>It needs at least two lines of “frequency  gain”; comments and phase columns are ignored</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Support:</strong> <a href="mailto:audiolabtenerife@gmail.com">audiolabtenerife@gmail.com</a> · <a href="https://sonik-audiolab.github.io/AudioLab-Privacy/audiolab-rta/support.html">Support page</a>. When writing, include a screenshot of the side panel (availableInputs): it shows what iPadOS sees.</p>
+</article>
+<article id="m-it" lang="it"><h1 class="t">AudioLab RTA Analyzer – Manuale d'uso</h1>
+<h2>1. Introduzione</h2>
+<p>AudioLab RTA Analyzer trasforma l'iPad in un sistema di misura per live, installazioni e studi: analizzatore in tempo reale (RTA), Transfer Function a doppio canale, risposta all'impulso, spettrogramma e misura SPL, con un generatore di rumore rosa integrato.</p>
+<p>Tutta l'elaborazione avviene sull'iPad. Niente viene registrato o inviato, e non serve nessun account.</p>
+<table>
+<thead>
+<tr>
+<th>Cosa serve</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iPad con iPadOS 17.6 o successivo</td>
+<td>Ideale un iPad con USB-C per le interfacce audio</td>
+</tr>
+<tr>
+<td>Microfono di misura</td>
+<td>es. Behringer ECM8000, Dayton EMM-6, Earthworks M23. Il microfono interno dell'iPad va bene solo per controlli rapidi</td>
+</tr>
+<tr>
+<td>Interfaccia audio USB-C class compliant</td>
+<td>es. Audient EVO 4. Almeno 2 ingressi per il reference esterno; deve ricevere abbastanza alimentazione (vedi Risoluzione problemi)</td>
+</tr>
+<tr>
+<td>Cassa o impianto</td>
+<td>Collegata all'uscita dell'interfaccia, per Transfer Function e misure acustiche</td>
+</tr>
+<tr>
+<td>File di calibrazione del microfono (facoltativo)</td>
+<td>.txt, .cal, .csv, .frd o .miccal, dal produttore o da un laboratorio di calibrazione</td>
+</tr>
+<tr>
+<td>Calibratore acustico o fonometro (facoltativo)</td>
+<td>Solo per leggere i dB SPL reali invece dei dBFS</td>
+</tr>
+</tbody>
+</table>
+<h2>2. Primo setup</h2>
+<p>Questi passaggi si fanno una volta sola: l'app ricorda le scelte per ogni interfaccia.</p>
+<ol>
+<li><strong>Collega l'interfaccia.</strong> Collega l'interfaccia USB-C all'iPad prima di aprire l'app. Collega il microfono di misura all'ingresso 1 e attiva il phantom (48 V) se il microfono lo richiede. Collega l'uscita dell'interfaccia alla cassa o all'impianto.</li>
+<li><strong>Apri l'app e premi START.</strong> iPadOS chiede l'accesso al microfono: premi <strong>Consenti</strong>. Senza permesso l'analizzatore resta muto (puoi attivarlo dopo in Impostazioni iPad › Privacy e sicurezza › Microfono).</li>
+<li><strong>Controlla l'ingresso.</strong> Il pulsante dell'ingresso nell'intestazione (es. <strong>EVO4</strong>) mostra il dispositivo attivo. L'interfaccia viene scelta in automatico quando la colleghi; tocca il pulsante per sceglierne un'altra.</li>
+<li><strong>Scegli il canale di misura.</strong> Nello stesso menu scegli <strong>IN 1</strong> o <strong>IN 2</strong>, cioè l'ingresso dove hai collegato il microfono. Se il canale scelto è muto, compare un avviso.</li>
+<li><strong>Regola il gain.</strong> Accendi il PINK (sezione 4) e alza il gain dell'interfaccia finché il meter nel pannello laterale segna circa −20 dBFS RMS, mai nel rosso.</li>
+<li><strong>Scegli il microfono.</strong> Tocca il pulsante del microfono (es. <strong>ECM8000</strong>) e scegli il tuo modello dalla lista.</li>
+<li><strong>Importa il file di calibrazione.</strong> Nel menu del microfono tocca <strong>IMPORTA FILE CAL</strong> e scegli il file dall'app File. Quando è caricato, nell'intestazione compare <strong>CAL ON</strong> e il pannello laterale mostra il nome del file. Tocca CAL ON / CAL OFF per attivare o togliere la correzione.</li>
+<li><strong>Scegli la lingua.</strong> Tocca <strong>IT · EN · ES</strong> nell'intestazione. Tutta l'interfaccia cambia subito.</li>
+</ol>
+<p>Per la Transfer Function con reference interno, calibra anche il loopback, una volta per ogni interfaccia (sezione 6).</p>
+<h2>3. Panoramica dello schermo</h2>
+<p>Lo schermo ha tre parti: l'intestazione con i comandi, la vista di misura principale e il pannello laterale con lo stato dell'ingresso.</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Funzione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>START / STOP</strong></td>
+<td>Avvia o ferma l'analizzatore</td>
+</tr>
+<tr>
+<td><strong>PINK</strong></td>
+<td>Apre il generatore di rumore rosa; diventa PINK ON mentre suona</td>
+</tr>
+<tr>
+<td><strong>IT · EN · ES</strong></td>
+<td>Lingua dell'interfaccia</td>
+</tr>
+<tr>
+<td><strong>RTA · TRANSFER · SPECTRO · IMPULSE</strong></td>
+<td>Le quattro viste di misura</td>
+</tr>
+<tr>
+<td><strong>Pulsante microfono</strong> (es. ECM8000)</td>
+<td>Modello del microfono e file di calibrazione</td>
+</tr>
+<tr>
+<td><strong>CAL ON / CAL OFF</strong></td>
+<td>Applica o toglie la curva di calibrazione del microfono</td>
+</tr>
+<tr>
+<td><strong>Pulsante ingresso</strong> (es. EVO4)</td>
+<td>Dispositivo di ingresso e canale di misura</td>
+</tr>
+<tr>
+<td><strong>Pannello Active input</strong></td>
+<td>Dispositivo, canali, frequenza di campionamento, buffer e meter (RMS e picco in dBFS)</td>
+</tr>
+<tr>
+<td><strong>Pannello availableInputs</strong></td>
+<td>Diagnostica tecnica: cosa vede iPadOS (ingressi, uscita, frequenza). Utile per l'assistenza</td>
+</tr>
+<tr>
+<td><strong>Pannello Mic &amp; calibrazione</strong></td>
+<td>Microfono scelto, file di calibrazione e stato della calibrazione SPL</td>
+</tr>
+</tbody>
+</table>
+<p>I banner arancioni sopra la misura sono avvisi: uscita non sull'interfaccia USB, Risparmio energetico attivo, canale muto o interfaccia ricollegata. Leggili prima di misurare.</p>
+<h2>4. Generatore di rumore rosa</h2>
+<p>Tocca <strong>PINK</strong> per aprire il generatore. Attiva <strong>Uscita attiva</strong> e regola il livello con lo slider (da −40 a 0 dBFS); parti basso, circa −20 dBFS, e alza gradualmente.</p>
+<ul>
+<li>Il pannello mostra dove va l'audio (es. <em>USCITA: EVO4</em>) e un pallino verde quando il motore sta davvero suonando.</li>
+<li>Con un'interfaccia USB collegata, il pink esce dall'uscita dell'interfaccia, mai dallo speaker dell'iPad. Se scolleghi l'interfaccia con il pink acceso, il generatore si zittisce in automatico.</li>
+<li>Lo stesso pink è il <strong>reference interno</strong> della Transfer Function, quindi il volume dell'iPad non influisce sulla misura.</li>
+</ul>
+<h2>5. RTA</h2>
+<p>L'RTA mostra il livello del segnale misurato per banda di frequenza, da 20 Hz a 20 kHz, in dBFS (o in dB SPL dopo la calibrazione SPL).</p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Funzione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1/3 · 1/6 · 1/12 · 1/24 · 1/48</strong></td>
+<td>Risoluzione in frazioni d'ottava. 1/3 per una visione rapida, 1/12–1/24 per l'allineamento, 1/48 per il dettaglio</td>
+</tr>
+<tr>
+<td><strong>OFF · FAST · SLOW</strong></td>
+<td>Media. FAST segue il segnale, SLOW dà una curva più stabile con il rumore rosa</td>
+</tr>
+<tr>
+<td><strong>RESET PEAK</strong></td>
+<td>Cancella i segni di picco (trattini rossi sopra le barre)</td>
+</tr>
+<tr>
+<td><strong>CAL SPL</strong></td>
+<td>Apre la calibrazione SPL (sezione 10)</td>
+</tr>
+<tr>
+<td><strong>SNAPSHOT</strong></td>
+<td>Salva la curva attuale per il confronto (sezione 9)</td>
+</tr>
+<tr>
+<td><strong>Livelli per banda</strong></td>
+<td>Sotto il grafico: livello delle bande d'ottava da 31,5 Hz a 16 kHz</td>
+</tr>
+</tbody>
+</table>
+<p>Le basse frequenze usano una FFT più lunga, quindi i bassi restano precisi anche a 1/24 e 1/48. Con rumore rosa e un sistema piatto, l'RTA risulta piatto.</p>
+<h2>6. Transfer Function</h2>
+<p>La Transfer Function confronta ciò che entra nel sistema (reference) con ciò che capta il microfono (misura). Mostra <strong>magnitudine</strong>, <strong>fase</strong> e <strong>coerenza</strong>, indipendentemente dalla musica o dal rumore usato.</p>
+<p><strong>Reference: si sceglie nella riga REFERENCE in alto nella scheda</strong></p>
+<ul>
+<li><strong>INTERNAL:</strong> il reference è il rumore rosa generato dall'app. Non servono cavi in più né un secondo ingresso. Accendi il PINK per misurare.</li>
+<li><strong>EXT CH 2:</strong> il reference arriva dal secondo ingresso dell'interfaccia. Usalo quando il segnale viene dal mixer o da un generatore esterno: sdoppia il segnale e mandane un ramo all'ingresso 2. Serve un'interfaccia con almeno 2 ingressi.</li>
+</ul>
+<p><strong>Delay Finder.</strong> Tocca <strong>FIND DELAY</strong>: l'app misura il tempo tra reference e microfono e li allinea, con precisione inferiore al campione. In alto compaiono <strong>DELAY</strong> (tempo totale) e <strong>ACOUSTIC</strong> (tempo e distanza in metri, tolto il loopback). Ripeti FIND DELAY ogni volta che sposti il microfono.</p>
+<p><strong>Calibrazione del loopback (solo reference interno).</strong> Con il reference interno la misura contiene anche latenza e filtri dei convertitori dell'interfaccia. Si eliminano una volta per ogni interfaccia:</p>
+<ol>
+<li>Collega un cavo dall'uscita dell'interfaccia all'ingresso di misura.</li>
+<li>Scegli INTERNAL, accendi il PINK e attendi una coerenza vicina a 1.</li>
+<li>Tocca <strong>CALIBRA LOOPBACK</strong>. La curva diventa piatta e ACOUSTIC segna circa 0 ms.</li>
+<li>Ricollega il microfono. ACOUSTIC ora mostra la distanza reale tra microfono e cassa.</li>
+</ol>
+<p>La calibrazione viene salvata per ogni interfaccia e resta anche dopo i ricollegamenti. <strong>TOGLI LOOPBACK</strong> la cancella.</p>
+<p><strong>Altri comandi</strong></p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Funzione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SMOOTHING</strong></td>
+<td>Smussa magnitudine e fase (in frazioni d'ottava)</td>
+</tr>
+<tr>
+<td><strong>AVG</strong></td>
+<td>Numero di medie vettoriali. Usane almeno 4: con AVG 1 la coerenza vale sempre 1</td>
+</tr>
+<tr>
+<td><strong>RESET AVG</strong></td>
+<td>Riavvia le medie, per esempio dopo aver spostato il microfono</td>
+</tr>
+<tr>
+<td><strong>CENTRA / 0 dB</strong></td>
+<td>Porta la curva di magnitudine attorno a 0 dB, o azzera l'offset</td>
+</tr>
+<tr>
+<td><strong>SNAPSHOT</strong></td>
+<td>Salva magnitudine e fase per il confronto</td>
+</tr>
+</tbody>
+</table>
+<p>La <strong>coerenza</strong> (0–1) indica quanto fidarsi di ogni frequenza. Vicino a 1 il dato è affidabile; una coerenza bassa indica rumore, riflessioni o segnale troppo basso, e quella parte della traccia viene nascosta.</p>
+<h2>7. Risposta all'impulso</h2>
+<p>L'impulso è calcolato dalla Transfer Function, quindi usa lo stesso reference e le stesse medie. 0 ms è il ritardo trovato da FIND DELAY: il picco principale dovrebbe cadere lì.</p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Funzione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LIN</strong></td>
+<td>Ampiezza lineare (da −1 a +1): mostra polarità e forma dell'arrivo</td>
+</tr>
+<tr>
+<td><strong>ETC dB</strong></td>
+<td>Curva energia-tempo in dB: mostra riflessioni e decadimento</td>
+</tr>
+<tr>
+<td><strong>WINDOW 20 · 50 · 100 · 300 ms</strong></td>
+<td>Durata visualizzata</td>
+</tr>
+<tr>
+<td><strong>FIND DELAY / RESET AVG</strong></td>
+<td>Come in TRANSFER</td>
+</tr>
+</tbody>
+</table>
+<p>Il badge <strong>POLARITY</strong> indica + o − in base al picco principale. Un − su una singola cassa di solito significa un cavo o un altoparlante invertito.</p>
+<h2>8. Spettrogramma</h2>
+<p>Lo spettrogramma mostra la frequenza (in orizzontale) nel tempo (in verticale, il più recente in alto), con il colore che indica il livello. È ideale per individuare feedback, risonanze e rumori che vanno e vengono.</p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Funzione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TOP 0 … −40</strong></td>
+<td>Livello mostrato con il colore più chiaro (dBFS)</td>
+</tr>
+<tr>
+<td><strong>RANGE 40 … 100</strong></td>
+<td>Ampiezza in dB della scala colori</td>
+</tr>
+<tr>
+<td><strong>SPEED FAST / SLOW</strong></td>
+<td>Velocità di scorrimento</td>
+</tr>
+<tr>
+<td><strong>PAUSE / CLEAR</strong></td>
+<td>Blocca o cancella l'immagine</td>
+</tr>
+<tr>
+<td><strong>FLAT PINK</strong></td>
+<td>Inclina la vista di +3 dB/ottava, così il rumore rosa appare piatto; utile per valutare il bilanciamento tonale</td>
+</tr>
+</tbody>
+</table>
+<h2>9. Snapshot</h2>
+<p>Gli snapshot salvano una curva per confrontarla con la misura in tempo reale, per esempio prima e dopo l'EQ, o due posizioni del microfono.</p>
+<ol>
+<li>Tocca <strong>SNAPSHOT</strong> in RTA o TRANSFER. La curva viene salvata con un nome e un colore.</li>
+<li>Tocca uno snapshot per mostrarlo o nasconderlo; tienilo premuto per rinominarlo o eliminarlo.</li>
+<li>In TRANSFER gli snapshot salvano sia la magnitudine sia la fase.</li>
+</ol>
+<p>Gli snapshot restano sull'iPad finché non li elimini.</p>
+<h2>10. Calibrazione SPL</h2>
+<p>Senza calibrazione tutti i livelli sono in dBFS. Calibra una volta per leggere i dB SPL reali; l'offset viene salvato per quell'ingresso. Aprila con <strong>CAL SPL</strong> nella vista RTA e scegli un metodo.</p>
+<p><strong>Con un calibratore acustico (il più preciso)</strong></p>
+<ol>
+<li>Inserisci il microfono nel calibratore (a tenuta) e accendilo.</li>
+<li>Regola il gain dell'interfaccia come lo userai in misura.</li>
+<li>Scegli <strong>94</strong> o <strong>114 dB</strong> e tocca <strong>MISURA</strong>. L'app riconosce il tono a 1 kHz e salva l'offset.</li>
+</ol>
+<p><strong>Con un fonometro</strong></p>
+<ol>
+<li>Metti il fonometro accanto al microfono, alla stessa altezza e puntato allo stesso modo. Impostalo su pesatura Z (o C) e risposta SLOW.</li>
+<li>Regola il gain dell'interfaccia come lo userai in misura.</li>
+<li>Tocca <strong>MISURA</strong>: il pink suona per 5 s. Leggi il valore medio sul fonometro, scrivilo e tocca <strong>APPLICA</strong>.</li>
+</ol>
+<p>La precisione è quella del fonometro: circa ±1–2 dB con uno strumento di Classe 2.</p>
+<p><strong>Importante:</strong> dopo la calibrazione non toccare più il gain dell'interfaccia. Se lo cambi, o se l'interfaccia viene ricollegata, rifai CAL SPL. Dopo un ricollegamento compare un banner che te lo ricorda.</p>
+<h2>11. Procedura rapida: misurare una cassa</h2>
+<ol>
+<li>Collega interfaccia, microfono (ingresso 1, phantom acceso) e cassa (uscita dell'interfaccia).</li>
+<li>Tocca <strong>START</strong>, controlla il pulsante dell'ingresso e il canale di misura.</li>
+<li>Posiziona il microfono in asse, a 1 m dalla cassa, all'altezza del tweeter.</li>
+<li>Accendi il <strong>PINK</strong> a livello basso e alzalo fino a un livello comodo, circa 20 dB sopra il rumore della stanza.</li>
+<li><strong>RTA</strong>, 1/12 d'ottava, SLOW: controlla il bilanciamento tonale generale.</li>
+<li><strong>TRANSFER</strong>, reference INTERNAL (loopback già calibrato), AVG 8: tocca <strong>FIND DELAY</strong>. ACOUSTIC dovrebbe segnare circa 2,9 ms / 1,0 m.</li>
+<li>Leggi magnitudine e fase dove la coerenza è alta. Tocca <strong>SNAPSHOT</strong>.</li>
+<li>Applica l'EQ o sposta la cassa, tocca <strong>RESET AVG</strong> e confronta con lo snapshot.</li>
+<li><strong>IMPULSE</strong>: controlla la polarità (+) e le riflessioni in ETC dB.</li>
+</ol>
+<h2>12. Risoluzione problemi e assistenza</h2>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Soluzione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RTA fermo in basso, nessun segnale</td>
+<td>Controlla il permesso microfono nelle Impostazioni dell'iPad, il canale di misura (IN 1 / IN 2), il phantom e il gain dell'interfaccia</td>
+</tr>
+<tr>
+<td>Il pink esce dallo speaker dell'iPad</td>
+<td>L'interfaccia viene vista solo come ingresso. Disattiva il Risparmio energetico, usa un hub USB-C alimentato o l'alimentatore dell'interfaccia, ricollegala. Se serve: Impostazioni iPad › Generali › Trasferisci o inizializza iPad › Ripristina › Ripristina impostazioni</td>
+</tr>
+<tr>
+<td>Banner “uscita non su USB”</td>
+<td>Come sopra: iPadOS non sta usando l'uscita dell'interfaccia</td>
+</tr>
+<tr>
+<td>Coerenza bassa ovunque</td>
+<td>Segnale troppo basso o troppo rumore: alza il pink, aumenta AVG, avvicina il microfono</td>
+</tr>
+<tr>
+<td>FIND DELAY segna “Non trovato”</td>
+<td>Pink spento, canale sbagliato o microfono troppo lontano: controlla e riprova</td>
+</tr>
+<tr>
+<td>ACOUSTIC segna una distanza sbagliata</td>
+<td>Calibra il loopback per questa interfaccia (sezione 6)</td>
+</tr>
+<tr>
+<td>I dB SPL sembrano sbagliati</td>
+<td>Gain cambiato dopo la calibrazione, o ingresso diverso: rifai CAL SPL</td>
+</tr>
+<tr>
+<td>File di calibrazione rifiutato</td>
+<td>Servono almeno due righe “frequenza  gain”; commenti e colonne di fase vengono ignorati</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Assistenza:</strong> <a href="mailto:audiolabtenerife@gmail.com">audiolabtenerife@gmail.com</a> · <a href="https://sonik-audiolab.github.io/AudioLab-Privacy/audiolab-rta/support.html">Pagina di supporto</a>. Quando scrivi, allega uno screenshot del pannello laterale (availableInputs): mostra cosa vede iPadOS.</p>
+</article>
+<article id="m-es" lang="es"><h1 class="t">AudioLab RTA Analyzer – Manual de usuario</h1>
+<h2>1. Introducción</h2>
+<p>AudioLab RTA Analyzer convierte el iPad en un sistema de medición para directo, instalaciones y estudios: analizador en tiempo real (RTA), función de transferencia de doble canal, respuesta al impulso, espectrograma y medición SPL, con un generador de ruido rosa integrado.</p>
+<p>Todo el procesamiento se hace en el iPad. No se graba ni se envía nada, y no hace falta ninguna cuenta.</p>
+<table>
+<thead>
+<tr>
+<th>Qué necesitas</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iPad con iPadOS 17.6 o posterior</td>
+<td>Lo ideal es un iPad con USB-C para las interfaces de audio</td>
+</tr>
+<tr>
+<td>Micrófono de medición</td>
+<td>p. ej. Behringer ECM8000, Dayton EMM-6, Earthworks M23. El micrófono interno del iPad solo sirve para comprobaciones rápidas</td>
+</tr>
+<tr>
+<td>Interfaz de audio USB-C class compliant</td>
+<td>p. ej. Audient EVO 4. Al menos 2 entradas para la referencia externa; necesita suficiente alimentación (ver Solución de problemas)</td>
+</tr>
+<tr>
+<td>Altavoz o sistema de PA</td>
+<td>Conectado a la salida de la interfaz, para función de transferencia y mediciones acústicas</td>
+</tr>
+<tr>
+<td>Archivo de calibración del micrófono (opcional)</td>
+<td>.txt, .cal, .csv, .frd o .miccal, del fabricante o de un laboratorio de calibración</td>
+</tr>
+<tr>
+<td>Calibrador acústico o sonómetro (opcional)</td>
+<td>Solo para leer dB SPL reales en lugar de dBFS</td>
+</tr>
+</tbody>
+</table>
+<h2>2. Primera configuración</h2>
+<p>Estos pasos se hacen una sola vez: la app recuerda tus ajustes para cada interfaz.</p>
+<ol>
+<li><strong>Conecta la interfaz.</strong> Conecta la interfaz USB-C al iPad antes de abrir la app. Conecta el micrófono de medición a la entrada 1 y activa la alimentación phantom (48 V) si el micrófono la necesita. Conecta la salida de la interfaz al altavoz o al sistema.</li>
+<li><strong>Abre la app y pulsa START.</strong> iPadOS pide acceso al micrófono: pulsa <strong>Permitir</strong>. Sin permiso el analizador no recibe señal (puedes activarlo después en Ajustes del iPad › Privacidad y seguridad › Micrófono).</li>
+<li><strong>Comprueba la entrada.</strong> El botón de entrada en la cabecera (p. ej. <strong>EVO4</strong>) muestra el dispositivo activo. La interfaz se selecciona automáticamente al conectarla; toca el botón para elegir otra.</li>
+<li><strong>Elige el canal de medición.</strong> En el mismo menú elige <strong>IN 1</strong> o <strong>IN 2</strong>, la entrada donde está el micrófono. Si el canal elegido no tiene señal, aparece un aviso.</li>
+<li><strong>Ajusta la ganancia.</strong> Activa el PINK (sección 4) y sube la ganancia de la interfaz hasta que el medidor del panel lateral marque unos −20 dBFS RMS, nunca en rojo.</li>
+<li><strong>Elige el micrófono.</strong> Toca el botón del micrófono (p. ej. <strong>ECM8000</strong>) y elige tu modelo de la lista.</li>
+<li><strong>Importa el archivo de calibración.</strong> En el menú del micrófono toca <strong>IMPORTAR ARCHIVO CAL</strong> y elige el archivo desde la app Archivos. Una vez cargado, aparece <strong>CAL ON</strong> en la cabecera y el panel lateral muestra el nombre del archivo. Toca CAL ON / CAL OFF para activar o quitar la corrección.</li>
+<li><strong>Elige el idioma.</strong> Toca <strong>IT · EN · ES</strong> en la cabecera. Toda la interfaz cambia al instante.</li>
+</ol>
+<p>Para la función de transferencia con referencia interna, calibra también el loopback, una vez por interfaz (sección 6).</p>
+<h2>3. Vista general de la pantalla</h2>
+<p>La pantalla tiene tres partes: la cabecera con los controles, la vista de medición principal y el panel lateral con el estado de la entrada.</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>START / STOP</strong></td>
+<td>Inicia o detiene el analizador</td>
+</tr>
+<tr>
+<td><strong>PINK</strong></td>
+<td>Abre el generador de ruido rosa; muestra PINK ON mientras suena</td>
+</tr>
+<tr>
+<td><strong>IT · EN · ES</strong></td>
+<td>Idioma de la interfaz</td>
+</tr>
+<tr>
+<td><strong>RTA · TRANSFER · SPECTRO · IMPULSE</strong></td>
+<td>Las cuatro vistas de medición</td>
+</tr>
+<tr>
+<td><strong>Botón de micrófono</strong> (p. ej. ECM8000)</td>
+<td>Modelo de micrófono y archivos de calibración</td>
+</tr>
+<tr>
+<td><strong>CAL ON / CAL OFF</strong></td>
+<td>Aplica o quita la curva de calibración del micrófono</td>
+</tr>
+<tr>
+<td><strong>Botón de entrada</strong> (p. ej. EVO4)</td>
+<td>Dispositivo de entrada y canal de medición</td>
+</tr>
+<tr>
+<td><strong>Panel Active input</strong></td>
+<td>Dispositivo, canales, frecuencia de muestreo, buffer y medidor (RMS y pico en dBFS)</td>
+</tr>
+<tr>
+<td><strong>Panel availableInputs</strong></td>
+<td>Diagnóstico técnico: lo que ve iPadOS (entradas, salida, frecuencia). Útil para el soporte</td>
+</tr>
+<tr>
+<td><strong>Panel Mic y calibración</strong></td>
+<td>Micrófono elegido, archivo de calibración y estado de la calibración SPL</td>
+</tr>
+</tbody>
+</table>
+<p>Los avisos naranjas encima de la medición indican: salida fuera de la interfaz USB, modo de bajo consumo activo, canal sin señal o interfaz reconectada. Léelos antes de medir.</p>
+<h2>4. Generador de ruido rosa</h2>
+<p>Toca <strong>PINK</strong> para abrir el generador. Activa <strong>Salida activa</strong> y ajusta el nivel con el control deslizante (de −40 a 0 dBFS); empieza bajo, unos −20 dBFS, y súbelo poco a poco.</p>
+<ul>
+<li>El panel muestra adónde va el audio (p. ej. <em>SALIDA: EVO4</em>) y un punto verde cuando el motor está sonando de verdad.</li>
+<li>Con una interfaz USB conectada, el rosa sale por la salida de la interfaz, nunca por el altavoz del iPad. Si desconectas la interfaz con el rosa activo, el generador se silencia automáticamente.</li>
+<li>El mismo ruido rosa es la <strong>referencia interna</strong> de la función de transferencia, así que el volumen del iPad no afecta a la medición.</li>
+</ul>
+<h2>5. RTA</h2>
+<p>El RTA muestra el nivel de la señal medida por banda de frecuencia, de 20 Hz a 20 kHz, en dBFS (o en dB SPL tras la calibración SPL).</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1/3 · 1/6 · 1/12 · 1/24 · 1/48</strong></td>
+<td>Resolución en fracciones de octava. 1/3 para una visión rápida, 1/12–1/24 para el ajuste, 1/48 para el detalle</td>
+</tr>
+<tr>
+<td><strong>OFF · FAST · SLOW</strong></td>
+<td>Promediado. FAST sigue la señal, SLOW da una curva más estable con ruido rosa</td>
+</tr>
+<tr>
+<td><strong>RESET PEAK</strong></td>
+<td>Borra las marcas de pico (trazos rojos sobre las barras)</td>
+</tr>
+<tr>
+<td><strong>CAL SPL</strong></td>
+<td>Abre la calibración SPL (sección 10)</td>
+</tr>
+<tr>
+<td><strong>SNAPSHOT</strong></td>
+<td>Guarda la curva actual para compararla (sección 9)</td>
+</tr>
+<tr>
+<td><strong>Niveles por banda</strong></td>
+<td>Debajo del gráfico: nivel de las bandas de octava de 31,5 Hz a 16 kHz</td>
+</tr>
+</tbody>
+</table>
+<p>Las frecuencias graves usan una FFT más larga, así que los graves son precisos incluso a 1/24 y 1/48. Con ruido rosa y un sistema plano, el RTA se ve plano.</p>
+<h2>6. Función de transferencia</h2>
+<p>La función de transferencia compara lo que entra en el sistema (referencia) con lo que capta el micrófono (medición). Muestra <strong>magnitud</strong>, <strong>fase</strong> y <strong>coherencia</strong>, sea cual sea la música o el ruido utilizado.</p>
+<p><strong>Referencia: se elige en la fila REFERENCE, arriba en la tarjeta</strong></p>
+<ul>
+<li><strong>INTERNAL:</strong> la referencia es el ruido rosa generado por la app. No hacen falta cables extra ni una segunda entrada. Activa el PINK para medir.</li>
+<li><strong>EXT CH 2:</strong> la referencia llega por la segunda entrada de la interfaz. Úsala cuando la señal viene de la mesa de mezclas o de un generador externo: divide la señal y manda una rama a la entrada 2. Requiere una interfaz con al menos 2 entradas.</li>
+</ul>
+<p><strong>Delay Finder.</strong> Toca <strong>FIND DELAY</strong>: la app mide el tiempo entre la referencia y el micrófono y los alinea, con precisión inferior a una muestra. Arriba aparecen <strong>DELAY</strong> (tiempo total) y <strong>ACOUSTIC</strong> (tiempo y distancia en metros, sin el loopback). Repite FIND DELAY cada vez que muevas el micrófono.</p>
+<p><strong>Calibración del loopback (solo referencia interna).</strong> Con la referencia interna la medición incluye también la latencia y los filtros de los convertidores de la interfaz. Se eliminan una vez por interfaz:</p>
+<ol>
+<li>Conecta un cable de la salida de la interfaz a la entrada de medición.</li>
+<li>Elige INTERNAL, activa el PINK y espera a que la coherencia esté cerca de 1.</li>
+<li>Toca <strong>CALIBRAR LOOPBACK</strong>. La curva queda plana y ACOUSTIC marca unos 0 ms.</li>
+<li>Vuelve a conectar el micrófono. ACOUSTIC muestra ahora la distancia real entre micrófono y altavoz.</li>
+</ol>
+<p>La calibración se guarda para cada interfaz y se mantiene tras las reconexiones. <strong>QUITAR LOOPBACK</strong> la borra.</p>
+<p><strong>Otros controles</strong></p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SMOOTHING</strong></td>
+<td>Suaviza magnitud y fase (en fracciones de octava)</td>
+</tr>
+<tr>
+<td><strong>AVG</strong></td>
+<td>Número de promedios vectoriales. Usa al menos 4: con AVG 1 la coherencia siempre vale 1</td>
+</tr>
+<tr>
+<td><strong>RESET AVG</strong></td>
+<td>Reinicia los promedios, p. ej. tras mover el micrófono</td>
+</tr>
+<tr>
+<td><strong>CENTRAR / 0 dB</strong></td>
+<td>Lleva la curva de magnitud alrededor de 0 dB, o pone el offset a cero</td>
+</tr>
+<tr>
+<td><strong>SNAPSHOT</strong></td>
+<td>Guarda magnitud y fase para compararlas</td>
+</tr>
+</tbody>
+</table>
+<p>La <strong>coherencia</strong> (0–1) indica cuánto fiarse de cada frecuencia. Cerca de 1 el dato es fiable; una coherencia baja indica ruido, reflexiones o señal insuficiente, y esa parte de la traza se oculta.</p>
+<h2>7. Respuesta al impulso</h2>
+<p>El impulso se calcula a partir de la función de transferencia, así que usa la misma referencia y los mismos promedios. 0 ms es el retardo encontrado por FIND DELAY: el pico principal debería caer ahí.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LIN</strong></td>
+<td>Amplitud lineal (de −1 a +1): muestra la polaridad y la forma de la llegada</td>
+</tr>
+<tr>
+<td><strong>ETC dB</strong></td>
+<td>Curva energía-tiempo en dB: muestra reflexiones y caída</td>
+</tr>
+<tr>
+<td><strong>WINDOW 20 · 50 · 100 · 300 ms</strong></td>
+<td>Duración mostrada</td>
+</tr>
+<tr>
+<td><strong>FIND DELAY / RESET AVG</strong></td>
+<td>Igual que en TRANSFER</td>
+</tr>
+</tbody>
+</table>
+<p>La etiqueta <strong>POLARITY</strong> indica + o − según el pico principal. Un − en un solo altavoz suele indicar un cable o un altavoz invertido.</p>
+<h2>8. Espectrograma</h2>
+<p>El espectrograma muestra la frecuencia (horizontal) a lo largo del tiempo (vertical, lo más reciente arriba), con el color indicando el nivel. Es ideal para detectar realimentación, resonancias y ruidos que aparecen y desaparecen.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TOP 0 … −40</strong></td>
+<td>Nivel mostrado con el color más claro (dBFS)</td>
+</tr>
+<tr>
+<td><strong>RANGE 40 … 100</strong></td>
+<td>Rango en dB de la escala de color</td>
+</tr>
+<tr>
+<td><strong>SPEED FAST / SLOW</strong></td>
+<td>Velocidad de desplazamiento</td>
+</tr>
+<tr>
+<td><strong>PAUSE / CLEAR</strong></td>
+<td>Congela o borra la imagen</td>
+</tr>
+<tr>
+<td><strong>FLAT PINK</strong></td>
+<td>Inclina la vista +3 dB/octava para que el ruido rosa se vea plano; útil para valorar el equilibrio tonal</td>
+</tr>
+</tbody>
+</table>
+<h2>9. Snapshots</h2>
+<p>Los snapshots guardan una curva para compararla con la medición en directo, por ejemplo antes y después de la EQ, o dos posiciones de micrófono.</p>
+<ol>
+<li>Toca <strong>SNAPSHOT</strong> en RTA o TRANSFER. La curva se guarda con un nombre y un color.</li>
+<li>Toca un snapshot para mostrarlo u ocultarlo; mantenlo pulsado para cambiarle el nombre o borrarlo.</li>
+<li>En TRANSFER los snapshots guardan magnitud y fase.</li>
+</ol>
+<p>Los snapshots se quedan en el iPad hasta que los borres.</p>
+<h2>10. Calibración SPL</h2>
+<p>Sin calibración todos los niveles están en dBFS. Calibra una vez para leer dB SPL reales; el offset se guarda para esa entrada. Ábrela con <strong>CAL SPL</strong> en la vista RTA y elige un método.</p>
+<p><strong>Con un calibrador acústico (el más preciso)</strong></p>
+<ol>
+<li>Introduce el micrófono en el calibrador (bien ajustado) y enciéndelo.</li>
+<li>Ajusta la ganancia de la interfaz como la usarás para medir.</li>
+<li>Elige <strong>94</strong> o <strong>114 dB</strong> y toca <strong>MEDIR</strong>. La app detecta el tono de 1 kHz y guarda el offset.</li>
+</ol>
+<p><strong>Con un sonómetro</strong></p>
+<ol>
+<li>Coloca el sonómetro junto al micrófono, a la misma altura y orientado igual. Ajústalo a ponderación Z (o C) y respuesta SLOW.</li>
+<li>Ajusta la ganancia de la interfaz como la usarás para medir.</li>
+<li>Toca <strong>MEDIR</strong>: el ruido rosa suena durante 5 s. Lee el valor medio en el sonómetro, escríbelo y toca <strong>APLICAR</strong>.</li>
+</ol>
+<p>La precisión es la del sonómetro: unos ±1–2 dB con un instrumento de Clase 2.</p>
+<p><strong>Importante:</strong> después de calibrar no toques la ganancia de la interfaz. Si la cambias, o si la interfaz se reconecta, repite CAL SPL. Tras una reconexión aparece un aviso que te lo recuerda.</p>
+<h2>11. Procedimiento rápido: medir un altavoz</h2>
+<ol>
+<li>Conecta interfaz, micrófono (entrada 1, phantom activado) y altavoz (salida de la interfaz).</li>
+<li>Toca <strong>START</strong>, comprueba el botón de entrada y el canal de medición.</li>
+<li>Coloca el micrófono en eje, a 1 m del altavoz, a la altura del tweeter.</li>
+<li>Activa el <strong>PINK</strong> a nivel bajo y súbelo hasta un nivel cómodo, unos 20 dB por encima del ruido de la sala.</li>
+<li><strong>RTA</strong>, 1/12 de octava, SLOW: comprueba el equilibrio tonal general.</li>
+<li><strong>TRANSFER</strong>, referencia INTERNAL (loopback ya calibrado), AVG 8: toca <strong>FIND DELAY</strong>. ACOUSTIC debería marcar unos 2,9 ms / 1,0 m.</li>
+<li>Lee magnitud y fase donde la coherencia es alta. Toca <strong>SNAPSHOT</strong>.</li>
+<li>Aplica EQ o mueve el altavoz, toca <strong>RESET AVG</strong> y compara con el snapshot.</li>
+<li><strong>IMPULSE</strong>: comprueba la polaridad (+) y las reflexiones en ETC dB.</li>
+</ol>
+<h2>12. Solución de problemas y soporte</h2>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RTA abajo del todo, sin señal</td>
+<td>Comprueba el permiso del micrófono en los Ajustes del iPad, el canal de medición (IN 1 / IN 2), la alimentación phantom y la ganancia de la interfaz</td>
+</tr>
+<tr>
+<td>El rosa sale por el altavoz del iPad</td>
+<td>La interfaz se ve solo como entrada. Desactiva el modo de bajo consumo, usa un hub USB-C con alimentación o la fuente de la interfaz y vuelve a conectarla. Si hace falta: Ajustes del iPad › General › Transferir o restablecer el iPad › Restablecer › Restablecer ajustes</td>
+</tr>
+<tr>
+<td>Aviso “salida no USB”</td>
+<td>Igual que arriba: iPadOS no está usando la salida de la interfaz</td>
+</tr>
+<tr>
+<td>Coherencia baja en todo el rango</td>
+<td>Señal muy baja o demasiado ruido: sube el rosa, aumenta AVG, acerca el micrófono</td>
+</tr>
+<tr>
+<td>FIND DELAY marca “No encontrado”</td>
+<td>Rosa apagado, canal equivocado o micrófono demasiado lejos: comprueba y repite</td>
+</tr>
+<tr>
+<td>ACOUSTIC marca una distancia incorrecta</td>
+<td>Calibra el loopback de esta interfaz (sección 6)</td>
+</tr>
+<tr>
+<td>Los dB SPL parecen incorrectos</td>
+<td>Ganancia cambiada tras calibrar, o entrada distinta: repite CAL SPL</td>
+</tr>
+<tr>
+<td>Archivo de calibración rechazado</td>
+<td>Necesita al menos dos líneas “frecuencia  ganancia”; los comentarios y las columnas de fase se ignoran</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Soporte:</strong> <a href="mailto:audiolabtenerife@gmail.com">audiolabtenerife@gmail.com</a> · <a href="https://sonik-audiolab.github.io/AudioLab-Privacy/audiolab-rta/support.html">Página de soporte</a>. Cuando escribas, adjunta una captura del panel lateral (availableInputs): muestra lo que ve iPadOS.</p>
+</article>
+<p class="muted" style="margin-top:40px"><a href="support.html">Support</a> · <a href="privacy.html">Privacy</a> — Last updated / Ultimo aggiornamento / Última actualización: 6 November 2026</p>
+</main><script>
+(function(){var L=["en","it","es"];function show(l){if(L.indexOf(l)<0)l="en";L.forEach(function(x){document.getElementById("m-"+x).classList.toggle("on",x===l);document.querySelector('[data-l="'+x+'"]').classList.toggle("on",x===l)});document.documentElement.lang=l}
+document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){show(b.dataset.l);history.replaceState(null,"","#"+b.dataset.l)}});
+var h=location.hash.slice(1),n=(navigator.language||"en").slice(0,2);show(L.indexOf(h)>=0?h:n)})();
+</script></body></html>
