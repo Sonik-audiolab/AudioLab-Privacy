@@ -12,9 +12,7 @@ article{display:none}article.on{display:block}
 table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px;display:block;overflow-x:auto}
 th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:600}
 td:first-child{white-space:nowrap}@media(max-width:600px){td:first-child{white-space:normal}}
-a{color:var(--lime)}.muted{color:var(--muted);font-size:14px}ul,ol{padding-left:22px}li{margin:4px 0}
-strong{color:#fff}
-</style></head><body><main>
+a{color:var(--lime)}.muted{color:var(--muted);font-size:14px}ul,ol{padding-left:22px}li{margin:4px 0}strong{color:#fff}</style></head><body><main>
 <header><img src="icon.png" alt=""><div><h1>AudioLab RTA Analyzer</h1><div class="muted">User Manual · Manuale d'uso · Manual de usuario</div></div></header>
 <nav><button data-l="en">English</button><button data-l="it">Italiano</button><button data-l="es">Español</button></nav>
 <article id="m-en" lang="en"><h1 class="t">AudioLab RTA Analyzer – User Manual</h1>
@@ -175,12 +173,12 @@ strong{color:#fff}
 <p><strong>Delay Finder.</strong> Tap <strong>FIND DELAY</strong>: the app measures the time between reference and mic and aligns them, with sub-sample accuracy. The header shows <strong>DELAY</strong> (total time) and <strong>ACOUSTIC</strong> (time and distance in metres after removing the loopback). Repeat FIND DELAY whenever you move the mic.</p>
 <p><strong>Loopback calibration (internal reference only).</strong> With the internal reference the measurement also contains the latency and filters of the interface converters. Remove them once per interface:</p>
 <ol>
-<li>Connect a cable from the interface output to the measurement input.</li>
+<li>Connect a cable from the interface output to the same input you use for the mic (e.g. IN 1).</li>
 <li>Select INTERNAL, turn on PINK and wait for coherence close to 1.</li>
 <li>Tap <strong>CALIBRATE LOOPBACK</strong>. Now the curve is flat and ACOUSTIC reads about 0 ms.</li>
 <li>Reconnect the mic. ACOUSTIC now shows the true mic-to-speaker distance.</li>
 </ol>
-<p>The calibration is saved per interface and survives reconnections. <strong>REMOVE LOOPBACK</strong> clears it.</p>
+<p>The calibration is saved per interface and survives reconnections and restarts. Repeat it after an app update or when you change interface; the latency shown is usually just a few milliseconds. <strong>REMOVE LOOPBACK</strong> clears it.</p>
 <p><strong>Other controls</strong></p>
 <table>
 <thead>
@@ -341,7 +339,7 @@ strong{color:#fff}
 </tr>
 <tr>
 <td>ACOUSTIC reads a wrong distance</td>
-<td>Calibrate the loopback for this interface (section 6)</td>
+<td>Calibrate the loopback for this interface, on the same input as the mic (section 6)</td>
 </tr>
 <tr>
 <td>dB SPL values look wrong</td>
@@ -513,12 +511,12 @@ strong{color:#fff}
 <p><strong>Delay Finder.</strong> Tocca <strong>FIND DELAY</strong>: l'app misura il tempo tra reference e microfono e li allinea, con precisione inferiore al campione. In alto compaiono <strong>DELAY</strong> (tempo totale) e <strong>ACOUSTIC</strong> (tempo e distanza in metri, tolto il loopback). Ripeti FIND DELAY ogni volta che sposti il microfono.</p>
 <p><strong>Calibrazione del loopback (solo reference interno).</strong> Con il reference interno la misura contiene anche latenza e filtri dei convertitori dell'interfaccia. Si eliminano una volta per ogni interfaccia:</p>
 <ol>
-<li>Collega un cavo dall'uscita dell'interfaccia all'ingresso di misura.</li>
+<li>Collega un cavo dall'uscita dell'interfaccia allo stesso ingresso che usi per il microfono (es. IN 1).</li>
 <li>Scegli INTERNAL, accendi il PINK e attendi una coerenza vicina a 1.</li>
 <li>Tocca <strong>CALIBRA LOOPBACK</strong>. La curva diventa piatta e ACOUSTIC segna circa 0 ms.</li>
 <li>Ricollega il microfono. ACOUSTIC ora mostra la distanza reale tra microfono e cassa.</li>
 </ol>
-<p>La calibrazione viene salvata per ogni interfaccia e resta anche dopo i ricollegamenti. <strong>TOGLI LOOPBACK</strong> la cancella.</p>
+<p>La calibrazione viene salvata per ogni interfaccia e resta anche dopo ricollegamenti e riavvii. Ripetila dopo un aggiornamento dell'app o se cambi interfaccia; la latency mostrata è di solito di pochi millisecondi. <strong>TOGLI LOOPBACK</strong> la cancella.</p>
 <p><strong>Altri comandi</strong></p>
 <table>
 <thead>
@@ -679,7 +677,7 @@ strong{color:#fff}
 </tr>
 <tr>
 <td>ACOUSTIC segna una distanza sbagliata</td>
-<td>Calibra il loopback per questa interfaccia (sezione 6)</td>
+<td>Calibra il loopback per questa interfaccia, sullo stesso ingresso del microfono (sezione 6)</td>
 </tr>
 <tr>
 <td>I dB SPL sembrano sbagliati</td>
@@ -851,12 +849,12 @@ strong{color:#fff}
 <p><strong>Delay Finder.</strong> Toca <strong>FIND DELAY</strong>: la app mide el tiempo entre la referencia y el micrófono y los alinea, con precisión inferior a una muestra. Arriba aparecen <strong>DELAY</strong> (tiempo total) y <strong>ACOUSTIC</strong> (tiempo y distancia en metros, sin el loopback). Repite FIND DELAY cada vez que muevas el micrófono.</p>
 <p><strong>Calibración del loopback (solo referencia interna).</strong> Con la referencia interna la medición incluye también la latencia y los filtros de los convertidores de la interfaz. Se eliminan una vez por interfaz:</p>
 <ol>
-<li>Conecta un cable de la salida de la interfaz a la entrada de medición.</li>
+<li>Conecta un cable de la salida de la interfaz a la misma entrada que usas para el micrófono (p. ej. IN 1).</li>
 <li>Elige INTERNAL, activa el PINK y espera a que la coherencia esté cerca de 1.</li>
 <li>Toca <strong>CALIBRAR LOOPBACK</strong>. La curva queda plana y ACOUSTIC marca unos 0 ms.</li>
 <li>Vuelve a conectar el micrófono. ACOUSTIC muestra ahora la distancia real entre micrófono y altavoz.</li>
 </ol>
-<p>La calibración se guarda para cada interfaz y se mantiene tras las reconexiones. <strong>QUITAR LOOPBACK</strong> la borra.</p>
+<p>La calibración se guarda para cada interfaz y se mantiene tras reconexiones y reinicios. Repítela tras actualizar la app o si cambias de interfaz; la latencia mostrada suele ser de pocos milisegundos. <strong>QUITAR LOOPBACK</strong> la borra.</p>
 <p><strong>Otros controles</strong></p>
 <table>
 <thead>
@@ -1017,7 +1015,7 @@ strong{color:#fff}
 </tr>
 <tr>
 <td>ACOUSTIC marca una distancia incorrecta</td>
-<td>Calibra el loopback de esta interfaz (sección 6)</td>
+<td>Calibra el loopback de esta interfaz, en la misma entrada del micrófono (sección 6)</td>
 </tr>
 <tr>
 <td>Los dB SPL parecen incorrectos</td>
@@ -1031,9 +1029,7 @@ strong{color:#fff}
 </table>
 <p><strong>Soporte:</strong> <a href="mailto:audiolabtenerife@gmail.com">audiolabtenerife@gmail.com</a> · <a href="https://sonik-audiolab.github.io/AudioLab-Privacy/audiolab-rta/support.html">Página de soporte</a>. Cuando escribas, adjunta una captura del panel lateral (availableInputs): muestra lo que ve iPadOS.</p>
 </article>
-<p class="muted" style="margin-top:40px"><a href="support.html">Support</a> · <a href="privacy.html">Privacy</a> — Last updated / Ultimo aggiornamento / Última actualización: 6 November 2026</p>
-</main><script>
-(function(){var L=["en","it","es"];function show(l){if(L.indexOf(l)<0)l="en";L.forEach(function(x){document.getElementById("m-"+x).classList.toggle("on",x===l);document.querySelector('[data-l="'+x+'"]').classList.toggle("on",x===l)});document.documentElement.lang=l}
+<p class="muted" style="margin-top:40px"><a href="support.html">Support</a> · <a href="privacy.html">Privacy</a> — Last updated / Ultimo aggiornamento / Última actualización: 9 November 2026</p>
+</main><script>(function(){var L=["en","it","es"];function show(l){if(L.indexOf(l)<0)l="en";L.forEach(function(x){document.getElementById("m-"+x).classList.toggle("on",x===l);document.querySelector('[data-l="'+x+'"]').classList.toggle("on",x===l)});document.documentElement.lang=l}
 document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){show(b.dataset.l);history.replaceState(null,"","#"+b.dataset.l)}});
-var h=location.hash.slice(1),n=(navigator.language||"en").slice(0,2);show(L.indexOf(h)>=0?h:n)})();
-</script></body></html>
+var h=location.hash.slice(1),n=(navigator.language||"en").slice(0,2);show(L.indexOf(h)>=0?h:n)})();</script></body></html>
